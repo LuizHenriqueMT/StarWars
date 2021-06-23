@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2021/06/22 20:56:48.536,=G:\Arquivos de Instalação\Delphi\Documents\Unit1.pas</Transaction>
+    <Transaction>2021/06/22 20:59:08.277,=G:\Arquivos de Instalação\Delphi\Documents\Unit2.pas</Transaction>
+    <Transaction>2021/06/22 21:00:12.772,G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UModulo.dfm=G:\Arquivos de Instalação\Delphi\Documents\Unit2.dfm</Transaction>
+    <Transaction>2021/06/22 21:00:12.772,G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UModulo.pas=G:\Arquivos de Instalação\Delphi\Documents\Unit2.pas</Transaction>
+    <Transaction>2021/06/22 21:00:20.631,G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UFilmes.fmx=G:\Arquivos de Instalação\Delphi\Documents\Unit1.fmx</Transaction>
+    <Transaction>2021/06/22 21:00:20.631,G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UFilmes.pas=G:\Arquivos de Instalação\Delphi\Documents\Unit1.pas</Transaction>
+    <Transaction>2021/06/22 21:00:32.468,G:\Programacao\Repositorio\Delphi\StarWars\src\StarWars.dproj=G:\Arquivos de Instalação\Delphi\Documents\Project1.dproj</Transaction>
+    <Transaction>2021/06/22 21:58:07.357,G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UStarWars.pas=G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UFilmes.pas</Transaction>
+    <Transaction>2021/06/22 21:58:07.357,G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UStarWars.fmx=G:\Programacao\Repositorio\Delphi\StarWars\src\unit\UFilmes.fmx</Transaction>
+  </Transactions>
+</BorlandProject>

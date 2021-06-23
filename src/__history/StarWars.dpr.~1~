@@ -1,0 +1,16 @@
+program StarWars;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  UFilmes in 'unit\UFilmes.pas' {Form1},
+  UModulo in 'unit\UModulo.pas' {DataModule2: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TDataModule2, DataModule2);
+  Application.Run;
+end.

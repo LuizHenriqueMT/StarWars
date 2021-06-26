@@ -6,18 +6,27 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   FMX.Controls.Presentation, FMX.StdCtrls, REST.Types, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope, FMX.ScrollBox, FMX.Memo;
+  Data.Bind.Components, Data.Bind.ObjectScope, FMX.ScrollBox, FMX.Memo,
+  FMX.Objects, System.ImageList, FMX.ImgList;
 
 type
   TfrmStarWars = class(TForm)
-    SpeedButton1: TSpeedButton;
-    RESTClient1: TRESTClient;
-    RESTRequest1: TRESTRequest;
-    RESTResponse1: TRESTResponse;
-    laySelectPlanet: TLayout;
-    laySelectFilms: TLayout;
-    laySelectPeoples: TLayout;
-    procedure Button1Click(Sender: TObject);
+    layPrincipal: TLayout;
+    layPlanet: TLayout;
+    layFilms: TLayout;
+    layCharacter: TLayout;
+    layCenter: TLayout;
+    shapeCharacter: TRoundRect;
+    btnCharacter: TRectangle;
+    lbCharacter: TText;
+    btnFilms: TRectangle;
+    shapeFilms: TRoundRect;
+    lbFilms: TText;
+    btnPlanets: TRectangle;
+    shapePlanets: TRoundRect;
+    lbPlanets: TText;
+    procedure btnPlanetClick(Sender: TObject);
+    procedure btnCharacterClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,11 +40,17 @@ implementation
 
 {$R *.fmx}
 
-procedure TfrmStarWars.Button1Click(Sender: TObject);
-begin
-  RESTRequest1.execute;
-  memo1.Text:= RESTResponse1.Content;
+uses UAPI, UModulo;
 
+procedure TfrmStarWars.btnCharacterClick(Sender: TObject);
+begin
+  frmAPI.Show;
+end;
+
+procedure TfrmStarWars.btnPlanetClick(Sender: TObject);
+begin
+  frmAPI.show;
+  ModuloREST.RESTRequest.Execute;
 end;
 
 end.

@@ -1,0 +1,30 @@
+unit UModulo;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, REST.Types, REST.Client,
+  Data.Bind.Components, Data.Bind.ObjectScope, REST.Response.Adapter;
+
+type
+  TModuloREST = class(TDataModule)
+    RESTClient: TRESTClient;
+    RESTRequest: TRESTRequest;
+    RESTResponse: TRESTResponse;
+    RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ModuloREST: TModuloREST;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

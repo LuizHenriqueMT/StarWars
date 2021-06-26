@@ -1,0 +1,27 @@
+object ModuloREST: TModuloREST
+  OldCreateOrder = False
+  Height = 297
+  Width = 564
+  object RESTClient: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'https://swapi.dev/api'
+    Params = <>
+    Left = 56
+    Top = 56
+  end
+  object RESTRequest: TRESTRequest
+    Client = RESTClient
+    Params = <>
+    Resource = 'planets/'
+    Response = RESTResponse
+    SynchronizedEvents = False
+    Left = 56
+    Top = 128
+  end
+  object RESTResponse: TRESTResponse
+    ContentType = 'application/json'
+    Left = 56
+    Top = 200
+  end
+end

@@ -25,8 +25,9 @@ type
     btnPlanets: TRectangle;
     shapePlanets: TRoundRect;
     lbPlanets: TText;
-    procedure btnPlanetClick(Sender: TObject);
     procedure btnCharacterClick(Sender: TObject);
+    procedure abrirFormAPI(Sender: TObject);
+    procedure btnPlanetsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,15 +43,25 @@ implementation
 
 uses UAPI, UModulo;
 
-procedure TfrmStarWars.btnCharacterClick(Sender: TObject);
+procedure TfrmStarWars.abrirFormAPI(Sender: TObject);
 begin
+  //Creating "frmAPI" form
+  frmAPI:= TfrmAPI.Create(application);
   frmAPI.Show;
 end;
 
-procedure TfrmStarWars.btnPlanetClick(Sender: TObject);
+procedure TfrmStarWars.btnCharacterClick(Sender: TObject);
 begin
-  frmAPI.show;
-  ModuloREST.RESTRequest.Execute;
+  abrirFormAPI(Sender);
+
+  //Execute Character Request
+end;
+
+procedure TfrmStarWars.btnPlanetsClick(Sender: TObject);
+begin
+  abrirFormAPI(Sender);
+
+  //Execute Planets Request
 end;
 
 end.

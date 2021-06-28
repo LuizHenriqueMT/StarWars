@@ -7,7 +7,8 @@ uses
   Data.Bind.Components, Data.Bind.ObjectScope, REST.Response.Adapter,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin,
+  Data.FMTBcd, Data.SqlExpr;
 
 type
   TModuloREST = class(TDataModule)
@@ -30,6 +31,9 @@ type
     FDMemTablecreated: TWideStringField;
     FDMemTableedited: TWideStringField;
     FDMemTableurl: TWideStringField;
+    RESTClient1: TRESTClient;
+    RESTRequest1: TRESTRequest;
+    RESTResponse1: TRESTResponse;
   private
     { Private declarations }
   public

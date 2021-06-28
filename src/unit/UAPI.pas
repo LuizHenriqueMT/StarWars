@@ -11,7 +11,7 @@ uses
   Data.Bind.ObjectScope, FMX.StdCtrls, FMX.Edit, REST.Response.Adapter,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   Data.Bind.DBScope, FMX.ListView, FMX.Layouts, FMX.ListBox, FMX.Objects,
-  FMX.Menus,IdHTTP, HTTPApp, System.StrUtils;
+  FMX.Menus,IdHTTP, HTTPApp, System.StrUtils, System.Json, Rest.Json;
 
 type
   TfrmAPI = class(TForm)
@@ -26,19 +26,25 @@ type
     ListBoxInformation: TListBox;
     ListBoxItem1: TListBoxItem;
     Edit1: TEdit;
+    Button1: TButton;
+    Memo1: TMemo;
+    Button2: TButton;
+    Button3: TButton;
     procedure ListView1UpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
     procedure ExecutarClick(Sender: TObject);
 
     procedure ShowDetails (Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     const
     //Tadução
-    Arido= 'Árido'; Temperado= 'Temperado'; Sombrio= 'Sombrio/Nublado'; 
+    Arido= 'Árido'; Temperado= 'Temperado'; Sombrio= 'Sombrio/Nublado';
     Congelado= 'Congelado'; Tropical= 'Tropical'; Desconhecido= 'Desconhecido';
 
     var
@@ -53,6 +59,67 @@ implementation
 {$R *.fmx}
 
 uses UStarWars, UModulo;
+
+procedure TfrmAPI.Button1Click(Sender: TObject);
+var
+  jsonPedObj, jsonObjItem: TJSONObject;
+  jsonArray: TJSONArray;
+begin
+  try
+    //Instancias
+    jsonPedObj:= TJSONObject.Create;
+    jsonObjItem:= TJSONObject.Create;
+
+    //Normal
+    jsonPedObj.AddPair('nome', 'Luiz');
+    jsonPedObj.AddPair('idade', TJSONNumber.Create(18));
+    jsonPedObj.AddPair('altura', TJSONNumber.Create(1.80));
+
+    //Instancias
+    jsonArray:= TJSONArray.Create;
+
+    //Array 1
+    jsonObjItem.AddPair('produto', 'AAA');
+    jsonObjItem.AddPair('descricao', 'Produto A');
+    jsonObjItem.AddPair('qtde', TJSONNumber.Create(1));
+
+    //Array 2
+    jsonObjItem.AddPair('produto', 'BBB');
+    jsonObjItem.AddPair('descricao', 'Produto B');
+    jsonObjItem.AddPair('qtde', TJSONNumber.Create(3));
+
+    jsonArray.AddElement(jsonObjitem);
+
+
+    jsonPedObj.AddPair('itens', jsonArray);
+
+    //Inserindo json no memo
+    memo1.Lines.Add(jsonPedObj.ToString);
+
+  finally
+    jsonPedObj.DisposeOf;
+  end;
+end;
+
+procedure TfrmAPI.Button2Click(Sender: TObject);
+var
+  jso : TJSONObject;
+  jsop: TJSONPair;
+  campoNome: string;
+begin
+  jso := TJsonObject.Create;
+  campoNome:= memo1.Lines.Text;
+  jso:= TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(campoNome), 0) as TJSONObject;
+
+
+  for jsop in jso do
+    begin
+      if jsop.JsonString.Value = 'name' then
+        showmessage (jsop.JsonValue.ToString);
+    end;
+  jso.disposeof;
+end;
+
 
 procedure TfrmAPI.ExecutarClick(Sender: TObject);
 var
@@ -77,7 +144,7 @@ begin
           listboxItemCreate.Parent:= listBoxInformation;
           listboxItemCreate.StyleLookup:= 'ListBoxItem1Style2';
           listboxItemCreate.Margins.Right:= 10;
-          listboxItemCreate.Margins.bottom:= 150;
+          listboxItemCreate.Margins.bottom:= 320;
           listboxItemCreate.Cursor:= crHandPoint;
           listBoxItemCreate.Selectable:= false;
           listBoxItemCreate.Text:= 'ItemCreate' + IntToStr(I);
@@ -85,12 +152,27 @@ begin
 
       with moduloREST do
         begin
-          //Adding planet's name
+          //Adding planet name
           listBoxItemCreate.StylesData['lbTitle']:= FDMemTable.FieldByName('name').AsString;
+
+          //Adding planet rotation
+          listBoxItemCreate.StylesData['vlrRotationPeriod']:= FDMemTable.FieldByName('rotation_period').AsString;
+
+          //Adding planet orbital
+          listBoxItemCreate.StylesData['vlrOrbitalPeriod']:= (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('orbital_period').AsString)));
+
+          //Adding planet diameter
+          listBoxItemCreate.StylesData['vlrDiameter']:= FDMemTable.FieldByName('diameter').AsString;
+
+          //Adding planet films
 
           //Translating and adding population of the planet
           if (FDMemTable.FieldByName('population').Value) = 'unknown' then
-            listBoxItemCreate.StylesData['vlrPopulation']:= Desconhecido
+            begin
+              listBoxItemCreate.StylesData['vlrPopulation']:= Desconhecido;
+
+
+            end
           else
             begin
               populacao:= FDMemTable.FieldByName('population').AsString;
@@ -162,13 +244,33 @@ end;
 procedure TfrmAPI.ShowDetails(Sender: TObject);
 var
   cont, I: integer;
+  ItemCreate: string;
 begin
-  ShowMessage(listBoxInformation.Items[listBoxInformation.ItemIndex]);
-
-  if (listBoxInformation.Items[listBoxInformation.ItemIndex]) = 'ItemCreate1' then
+  //Show more details
+  for I:= 1 to (moduloREST.FDMemTable.RecordCount) do
     begin
-      showmessage ('kdsoakdo');
-      listBoxInformation.ItemByIndex(1).Margins.Bottom:= 0;
+      if (listBoxInformation.ListItems[I-1].Margins.bottom = 0) then
+        begin
+          listBoxInformation.ListItems[I-1].Margins.bottom:= 320;
+          listBoxInformation.ListItems[I-1].StylesData['layRotationPeriod.Visible']:= false;
+          listBoxInformation.ListItems[I-1].StylesData['layOrbitalPeriod.Visible']:= false;
+          listBoxInformation.ListItems[I-1].StylesData['layDiameter.Visible']:= false;
+          listBoxInformation.ListItems[I-1].StylesData['layFilms.Visible']:= false;
+          listBoxInformation.ListItems[I-1].StylesData['layResident.Visible']:= false;
+        end
+      else
+      if (listBoxInformation.Items[listBoxInformation.ItemIndex]) = 'ItemCreate' + IntToStr(I) then
+        begin
+          listBoxInformation.ListItems[I-1].Margins.bottom:= 0;
+          listBoxInformation.ListItems[I-1].StylesData['layRotationPeriod.Visible']:= true;
+          listBoxInformation.ListItems[I-1].StylesData['layOrbitalPeriod.Visible']:= true;
+          listBoxInformation.ListItems[I-1].StylesData['layDiameter.Visible']:= true;
+          listBoxInformation.ListItems[I-1].StylesData['layFilms.Visible']:= true;
+          listBoxInformation.ListItems[I-1].StylesData['layResident.Visible']:= true;
+
+          ItemCreate:= 'ItemCreate' + IntToStr(I);
+          frmAPI.UpdateStyleBook;
+        end;
     end;
 
 end;

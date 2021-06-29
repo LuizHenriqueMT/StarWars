@@ -28,15 +28,8 @@ Coordinates=650,120,89,159
 [listBoxAPI]
 Coordinates=540,320,116,177
 
-[GroupBox1]
-Coordinates=158,210,70,51
-Visible=True
-
 [StyleBook1]
 Coordinates=303,1,70,33
-
-[Executar]
-Coordinates=20,231,57,51
 
 [BindSourceDB1]
 Coordinates=820,130,132,321
@@ -47,4 +40,11 @@ Coordinates=135,1,82,33
 [ListBoxInformation]
 Coordinates=1010,140,116,213
 Visible=True
+
+[groupBoxFilter]
+Coordinates=158,210,70,51
+Visible=True
+
+[btnExecute]
+Coordinates=20,231,57,51
 

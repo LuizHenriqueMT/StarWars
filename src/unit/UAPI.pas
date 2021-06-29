@@ -17,27 +17,34 @@ type
   TfrmAPI = class(TForm)
     listBoxAPI: TListBox;
     panelAPI: TPanel;
-    GroupBox1: TGroupBox;
+    groupBoxFilter: TGroupBox;
     StyleBook1: TStyleBook;
     ListView1: TListView;
-    Executar: TButton;
+    btnExecute: TButton;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     ListBoxInformation: TListBox;
     ListBoxItem1: TListBoxItem;
-    Edit1: TEdit;
-    Button1: TButton;
+    edtFilterName: TEdit;
+    btnCreateJson: TButton;
     Memo1: TMemo;
-    Button2: TButton;
-    Button3: TButton;
+    btnReadJson: TButton;
+    lbPlanetName: TLabel;
+    edtFilterPopulation: TEdit;
+    lbPlanetPopulation: TLabel;
+    edtFilterClimate: TEdit;
+    lbPlanetClimate: TLabel;
+    btnFilter: TButton;
+    SpeedButton1: TSpeedButton;
     procedure ListView1UpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
-    procedure ExecutarClick(Sender: TObject);
 
     procedure ShowDetails (Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnCreateJsonClick(Sender: TObject);
+    procedure btnReadJsonClick(Sender: TObject);
+    procedure btnFilterClick(Sender: TObject);
+    procedure createItems(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,7 +67,7 @@ implementation
 
 uses UStarWars, UModulo;
 
-procedure TfrmAPI.Button1Click(Sender: TObject);
+procedure TfrmAPI.btnCreateJsonClick(Sender: TObject);
 var
   jsonPedObj, jsonObjItem: TJSONObject;
   jsonArray: TJSONArray;
@@ -101,7 +108,7 @@ begin
   end;
 end;
 
-procedure TfrmAPI.Button2Click(Sender: TObject);
+procedure TfrmAPI.btnReadJsonClick(Sender: TObject);
 var
   jso : TJSONObject;
   jsop: TJSONPair;
@@ -121,19 +128,11 @@ begin
 end;
 
 
-procedure TfrmAPI.ExecutarClick(Sender: TObject);
+procedure TfrmAPI.createItems(Sender: TObject);
 var
   nomePlaneta, populacao: string;
   I: integer;
 begin
-  //Initializing information of the listBoxInformation
-  listBoxInformation.Clear;
-  listBoxInformation.BeginUpdate;
-
-  //Initializing request
-  moduloREST.RESTRequest.Execute;
-  modulOREST.FDMemTable.First;
-
   //Data count
   for I:= 1 to (moduloREST.FDMemTable.RecordCount) do
     begin
@@ -220,6 +219,49 @@ begin
   listBoxInformation.EndUpdate;
 end;
 
+procedure TfrmAPI.btnFilterClick(Sender: TObject);
+begin
+  with moduloREST do
+    begin
+      if (edtFilterName.Text = '') and (edtFilterPopulation.Text = '') and
+      (edtFilterClimate.Text = '') then
+        begin
+          //Initializing information of the listBoxInformation
+          listBoxInformation.Clear;
+          listBoxInformation.BeginUpdate;
+
+          //Initializing request
+          RESTClientFilter.BaseURL:= '';
+          RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
+          RESTRequest.Resource:= '';
+          RESTRequest.Resource:= 'planets/';
+          RESTRequest.Execute;
+          FDMemTable.First;
+
+          //Starts main action of creating items
+          createItems(sender);
+        end
+      else
+        begin
+          //Initializing information of the listBoxInformation
+          listBoxInformation.Clear;
+          listBoxInformation.BeginUpdate;
+
+          RESTClientFilter.BaseURL:= '';
+          RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
+          RESTRequest.Resource:= '';
+          RESTRequest.Resource:= 'planets/?search={name}';
+          RESTRequest.Params.ParameterByName('name').Value:= edtFilterName.Text;
+          RESTRequest.Execute;
+          FDMemTable.First;
+
+          //Starts main action of creating items
+          createItems(Sender);
+        end;
+
+    end;
+end;
+
 procedure TfrmAPI.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   //Destroying form
@@ -257,6 +299,7 @@ begin
           listBoxInformation.ListItems[I-1].StylesData['layDiameter.Visible']:= false;
           listBoxInformation.ListItems[I-1].StylesData['layFilms.Visible']:= false;
           listBoxInformation.ListItems[I-1].StylesData['layResident.Visible']:= false;
+          frmAPI.UpdateStyleBook;
         end
       else
       if (listBoxInformation.Items[listBoxInformation.ItemIndex]) = 'ItemCreate' + IntToStr(I) then

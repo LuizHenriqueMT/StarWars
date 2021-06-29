@@ -31,9 +31,9 @@ type
     FDMemTablecreated: TWideStringField;
     FDMemTableedited: TWideStringField;
     FDMemTableurl: TWideStringField;
-    RESTClient1: TRESTClient;
-    RESTRequest1: TRESTRequest;
-    RESTResponse1: TRESTResponse;
+    RESTRequestFilter: TRESTRequest;
+    RESTResponseFilter: TRESTResponse;
+    RESTClientFilter: TRESTClient;
   private
     { Private declarations }
   public

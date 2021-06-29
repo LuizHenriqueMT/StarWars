@@ -15,40 +15,37 @@ uses
 
 type
   TfrmAPI = class(TForm)
-    listBoxAPI: TListBox;
     panelAPI: TPanel;
     groupBoxFilter: TGroupBox;
     StyleBook1: TStyleBook;
-    ListView1: TListView;
-    btnExecute: TButton;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     ListBoxInformation: TListBox;
-    ListBoxItem1: TListBoxItem;
     edtFilterName: TEdit;
-    btnCreateJson: TButton;
-    Memo1: TMemo;
-    btnReadJson: TButton;
     lbPlanetName: TLabel;
     edtFilterPopulation: TEdit;
     lbPlanetPopulation: TLabel;
     edtFilterClimate: TEdit;
     lbPlanetClimate: TLabel;
     btnFilter: TButton;
-    SpeedButton1: TSpeedButton;
-    procedure ListView1UpdateObjects(const Sender: TObject;
-      const AItem: TListViewItem);
+    btnNext: TSpeedButton;
+    btnClear: TButton;
+    LinkFillControlToField1: TLinkFillControlToField;
+    btnPrevious: TSpeedButton;
 
     procedure ShowDetails (Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btnCreateJsonClick(Sender: TObject);
-    procedure btnReadJsonClick(Sender: TObject);
     procedure btnFilterClick(Sender: TObject);
     procedure createItems(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
+    procedure btnNextClick(Sender: TObject);
+    procedure btnPreviousClick(Sender: TObject);
   private
     { Private declarations }
+
   public
     { Public declarations }
+
     const
     //Tadução
     Arido= 'Árido'; Temperado= 'Temperado'; Sombrio= 'Sombrio/Nublado';
@@ -56,6 +53,7 @@ type
 
     var
       ListBoxItemCreate: TListBoxItem;
+      pagina, contPagina: integer;
   end;
 
 var
@@ -67,76 +65,42 @@ implementation
 
 uses UStarWars, UModulo;
 
-procedure TfrmAPI.btnCreateJsonClick(Sender: TObject);
-var
-  jsonPedObj, jsonObjItem: TJSONObject;
-  jsonArray: TJSONArray;
+procedure TfrmAPI.btnClearClick(Sender: TObject);
 begin
-  try
-    //Instancias
-    jsonPedObj:= TJSONObject.Create;
-    jsonObjItem:= TJSONObject.Create;
+  //Clear fields (edit) values
+  edtFilterName.Text:= '';
+  edtFilterPopulation.Text:= '';
+  edtFilterClimate.Text:= '';
 
-    //Normal
-    jsonPedObj.AddPair('nome', 'Luiz');
-    jsonPedObj.AddPair('idade', TJSONNumber.Create(18));
-    jsonPedObj.AddPair('altura', TJSONNumber.Create(1.80));
+  listBoxInformation.Clear;
+  listBoxInformation.BeginUpdate;
 
-    //Instancias
-    jsonArray:= TJSONArray.Create;
+  //Execute Planets Request
+  moduloREST.RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
+  moduloREST.RESTRequest.Resource:= 'planets/';
+  moduloREST.RESTRequest.Execute;
 
-    //Array 1
-    jsonObjItem.AddPair('produto', 'AAA');
-    jsonObjItem.AddPair('descricao', 'Produto A');
-    jsonObjItem.AddPair('qtde', TJSONNumber.Create(1));
-
-    //Array 2
-    jsonObjItem.AddPair('produto', 'BBB');
-    jsonObjItem.AddPair('descricao', 'Produto B');
-    jsonObjItem.AddPair('qtde', TJSONNumber.Create(3));
-
-    jsonArray.AddElement(jsonObjitem);
-
-
-    jsonPedObj.AddPair('itens', jsonArray);
-
-    //Inserindo json no memo
-    memo1.Lines.Add(jsonPedObj.ToString);
-
-  finally
-    jsonPedObj.DisposeOf;
-  end;
+  moduloREST.FDMemTable.Active:= true;
+  moduloREST.FDMemTable.Open;
+  moduloREST.FDMemTable.First;
+  createItems(sender);
 end;
-
-procedure TfrmAPI.btnReadJsonClick(Sender: TObject);
-var
-  jso : TJSONObject;
-  jsop: TJSONPair;
-  campoNome: string;
-begin
-  jso := TJsonObject.Create;
-  campoNome:= memo1.Lines.Text;
-  jso:= TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(campoNome), 0) as TJSONObject;
-
-
-  for jsop in jso do
-    begin
-      if jsop.JsonString.Value = 'name' then
-        showmessage (jsop.JsonValue.ToString);
-    end;
-  jso.disposeof;
-end;
-
 
 procedure TfrmAPI.createItems(Sender: TObject);
 var
-  nomePlaneta, populacao: string;
-  I: integer;
+  nomePlaneta, dir: string;
+  I: Integer;
+  clima: array [1..13] of string;
 begin
-  //Data count
-  for I:= 1 to (moduloREST.FDMemTable.RecordCount) do
-    begin
-      //Creating listBoxInformation items
+  //icon directory
+  dir:= '../StarWars\icon\';
+
+  with moduloREST do
+    begin                      
+      //Data count
+      for I:= 1 to (moduloREST.FDMemTable.RecordCount) do
+        begin
+          //Creating listBoxInformation items
           listBoxItemCreate:= TListBoxItem.Create(listBoxInformation);
           listboxItemCreate.Height:= 182;
           listboxItemCreate.Width:= 250;
@@ -149,80 +113,139 @@ begin
           listBoxItemCreate.Text:= 'ItemCreate' + IntToStr(I);
           listboxItemCreate.OnClick:= ShowDetails;
 
-      with moduloREST do
-        begin
           //Adding planet name
           listBoxItemCreate.StylesData['lbTitle']:= FDMemTable.FieldByName('name').AsString;
-
-          //Adding planet rotation
-          listBoxItemCreate.StylesData['vlrRotationPeriod']:= FDMemTable.FieldByName('rotation_period').AsString;
-
-          //Adding planet orbital
-          listBoxItemCreate.StylesData['vlrOrbitalPeriod']:= (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('orbital_period').AsString)));
-
-          //Adding planet diameter
-          listBoxItemCreate.StylesData['vlrDiameter']:= FDMemTable.FieldByName('diameter').AsString;
-
-          //Adding planet films
 
           //Translating and adding population of the planet
           if (FDMemTable.FieldByName('population').Value) = 'unknown' then
             begin
               listBoxItemCreate.StylesData['vlrPopulation']:= Desconhecido;
-
-
             end
           else
             begin
-              populacao:= FDMemTable.FieldByName('population').AsString;
-              listBoxItemCreate.StylesData['vlrPopulation']:= (formatFloat('#,##0',strtofloat(populacao)));
+              listBoxItemCreate.StylesData['vlrPopulation']:=
+              (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('population').AsString)));
+            end;
+
+          //Adding planet rotation
+          if (FDMemTable.FieldByName('rotation_period').Value) = 'unknown' then
+            begin
+              listBoxItemCreate.StylesData['vlrRotationPeriod']:= Desconhecido;
+            end
+          else
+            begin
+              listBoxItemCreate.StylesData['vlrRotationPeriod']:=
+              FDMemTable.FieldByName('rotation_period').AsString;
+            end;
+
+          //Adding planet orbital
+          if (FDMemTable.FieldByName('orbital_period').Value) = 'unknown' then
+            begin
+              listBoxItemCreate.StylesData['vlrOrbitalPeriod']:= Desconhecido;
+            end;
+          {else
+            begin
+              listBoxItemCreate.StylesData['vlrOrbitalPeriod']:=
+              (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('orbital_period').AsString)));
+            end;}
+
+          //Adding planet diameter
+          if (FDMemTable.FieldByName('orbital_period').Value) = 'unknown' then
+            begin
+              listBoxItemCreate.StylesData['diameter']:= Desconhecido;
+            end
+          else
+            begin
+              listBoxItemCreate.StylesData['vlrDiameter']:=
+              (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('diameter').AsString)));
             end;
 
           //Translating and adding planet climate
           if (FDMemTable.FieldByName('climate').value) = 'arid' then
             begin
-              listBoxItemCreate.StylesData['vlrClimate']:= Arido;
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile('../StarWars\icon\climate_arid.png');
+              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_arid.png');
             end
           else
           if (FDMemTable.FieldByName('climate').value) = 'temperate' then
             begin
-              listBoxItemCreate.StylesData['vlrClimate']:= Temperado;
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile('../StarWars\icon\climate_temperate.png');
+              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_temperate.png');
             end
           else
           if (FDMemTable.FieldByName('climate').value) = 'frozen' then
             begin
-              listBoxItemCreate.StylesData['vlrClimate']:= Congelado;
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile('../StarWars\icon\climate_frozen.png');
+              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_frozen.png');
             end
           else
           if (FDMemTable.FieldByName('climate').value) = 'murky' then
             begin
-              listBoxItemCreate.StylesData['vlrClimate']:= Sombrio;
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile('../StarWars\icon\climate_murky.png');
+              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_murky.png');
             end
           else
           if (FDMemTable.FieldByName('climate').Value) = 'temperate, tropical' then
             begin
-             listBoxItemCreate.StylesData['vlrClimate']:= Temperado + ', ' + Tropical;
-             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile('../StarWars\icon\climate_both.png');
+             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
+            end
+          else
+          if (FDMemTable.FieldByName('climate').Value) = 'temperate, arid' then
+            begin
+             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
+            end
+          else
+          if (FDMemTable.FieldByName('climate').Value) = 'temperate, tropical' then
+            begin
+             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
             end;
+
+          clima[I]:= FDMemTable.FieldByName('climate').AsString;
+
+          if FDMemTable.FieldByName('climate').AsString = clima[I] then
+            begin
+              clima[I]:= AnsiReplaceText(clima[I], 'arid','Árido');
+              clima[I]:= AnsiReplaceText(clima[I], 'temperate','Temperado');
+              clima[I]:= AnsiReplaceText(clima[I], 'murky','Sombrio/Nublado');
+              clima[I]:= AnsiReplaceText(clima[I], 'windy','Ventoso');
+              clima[I]:= AnsiReplaceText(clima[I], 'hot','Calor');
+              clima[I]:= AnsiReplaceText(clima[I], 'artificial temperate ','Temperatura Artificial ');
+              clima[I]:= AnsiReplaceText(clima[I], 'tropical','Tropical');
+              clima[I]:= AnsiReplaceText(clima[I], 'frozen','Gelado');
+              clima[I]:= AnsiReplaceText(clima[I], 'frigid','Congelado');
+              clima[I]:= AnsiReplaceText(clima[I], 'humid','Úmido');
+              clima[I]:= AnsiReplaceText(clima[I], 'moist','Úmido');
+              clima[I]:= AnsiReplaceText(clima[I], 'polluted','Poluído');
+              clima[I]:= AnsiReplaceText(clima[I], 'superheated','Superaquecido');
+              clima[I]:= AnsiReplaceText(clima[I], 'subartic','Subártico');
+              clima[I]:= AnsiReplaceText(clima[I], 'polluted','Poluído');
+              clima[I]:= AnsiReplaceText(clima[I], 'artic','Ártico');
+              clima[I]:= AnsiReplaceText(clima[I], 'rocky','Rochoso');
+              clima[I]:= AnsiReplaceStr(clima[I], 'unknown','Desconhecido');
+
+              listBoxItemCreate.StylesData['vlrClimate']:= clima[I];
+            end;
+
+          //Adding the item object created in the previous routine to the listBoxInformation
+          listBoxInformation.AddObject(listBoxItemCreate);
+
+          //Next column record
+          FDMemTable.Next;
         end;
-
-      //Adding the item object created in the previous routine to the listBoxInformation
-      listBoxInformation.AddObject(listBoxItemCreate);
-
-      //Next column record
-      moduloREST.FDMemTable.Next;
     end;
   listBoxInformation.EndUpdate;
 end;
 
 procedure TfrmAPI.btnFilterClick(Sender: TObject);
+var
+  I,con: Integer;
 begin
   with moduloREST do
     begin
+      RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
+      RESTRequest.Resource:= 'planets/';
+      RESTRequest.Execute;
+
+      FDMemTable.Active:= true;
+      FDMemTable.Open;
+      FDMemTable.First;
+
       if (edtFilterName.Text = '') and (edtFilterPopulation.Text = '') and
       (edtFilterClimate.Text = '') then
         begin
@@ -231,9 +254,6 @@ begin
           listBoxInformation.BeginUpdate;
 
           //Initializing request
-          RESTClientFilter.BaseURL:= '';
-          RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
-          RESTRequest.Resource:= '';
           RESTRequest.Resource:= 'planets/';
           RESTRequest.Execute;
           FDMemTable.First;
@@ -242,23 +262,63 @@ begin
           createItems(sender);
         end
       else
+      if (edtFilterName.Text <> '') or (edtFilterPopulation.Text <> '') or
+      (edtFilterClimate.Text <> '') then
         begin
           //Initializing information of the listBoxInformation
           listBoxInformation.Clear;
           listBoxInformation.BeginUpdate;
 
-          RESTClientFilter.BaseURL:= '';
-          RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
-          RESTRequest.Resource:= '';
-          RESTRequest.Resource:= 'planets/?search={name}';
-          RESTRequest.Params.ParameterByName('name').Value:= edtFilterName.Text;
-          RESTRequest.Execute;
-          FDMemTable.First;
+          //Verify that all fields match the search
+          con:=FDMemTable.RecordCount;
+          for I:= 1 to FDMemTable.RecordCount do
+            begin
+              if ((edtFilterName.text = FDMemTable.FieldByName('name').Value) or
+              (edtFilterPopulation.Text = FDMemTable.FieldByName('population').value)) or
+              (edtFilterClimate.Text = FDMemTable.FieldByName('Climate').value) then
+                begin
+                  if (edtFilterName.Text = FDMemTable.FieldByName('name').Value) then
+                    begin
+                      RESTRequest.Resource:= '';
+                      RESTRequest.Resource:= 'planets/?search={name}';
+                      RESTRequest.Params.ParameterByName('name').Value:= edtFilterName.Text;
+                      RESTRequest.Execute;
 
-          //Starts main action of creating items
-          createItems(Sender);
+                      //Starts main action of creating items
+                      createItems(Sender);
+                    end
+                  else
+                  if (edtFilterPopulation.Text = FDMemTable.FieldByName('population').value) then
+                    begin
+                      RESTRequest.Resource:= '';
+                      RESTRequest.Resource:= 'planets/?search={population}';
+                      RESTRequest.Params.ParameterByName('population').Value:= edtFilterName.Text;
+                      RESTRequest.Execute;
+
+                      //Starts main action of creating items
+                      createItems(Sender);
+                    end
+                  else
+                  if (edtFilterClimate.Text = FDMemTable.FieldByName('Climate').value) then
+                    begin
+                      RESTRequest.Resource:= '';
+                      RESTRequest.Resource:= 'planets/?search={climate}';
+                      RESTRequest.Params.ParameterByName('climate').Value:= edtFilterName.Text;
+                      RESTRequest.Execute;
+
+                      //Starts main action of creating items
+                      createItems(Sender);
+                    end;
+                  exit
+                end
+              else
+                showmessage ('Nenhum planeta foi encontrado!');
+            end;
+        end
+      else
+        begin
+          showmessage ('Nenhum planeta foi encontrado!');
         end;
-
     end;
 end;
 
@@ -267,20 +327,6 @@ begin
   //Destroying form
   Release;
   frmAPI:= nil;
-end;
-
-procedure TfrmAPI.ListView1UpdateObjects(const Sender: TObject;
-  const AItem: TListViewItem);
-var
-  img: TListItemImage;
-begin
-  //Image resize
-  with AItem do
-    begin
-      img:= TListItemImage(Objects.FindDrawable('Image5'));
-      img.Width:= frmAPI.Width;
-      img.Height:= frmAPI.Height;
-    end;
 end;
 
 procedure TfrmAPI.ShowDetails(Sender: TObject);
@@ -302,7 +348,7 @@ begin
           frmAPI.UpdateStyleBook;
         end
       else
-      if (listBoxInformation.Items[listBoxInformation.ItemIndex]) = 'ItemCreate' + IntToStr(I) then
+      if ((listBoxInformation.Items[listBoxInformation.ItemIndex]) = 'ItemCreate' + IntToStr(I)) then
         begin
           listBoxInformation.ListItems[I-1].Margins.bottom:= 0;
           listBoxInformation.ListItems[I-1].StylesData['layRotationPeriod.Visible']:= true;
@@ -316,6 +362,75 @@ begin
         end;
     end;
 
+end;
+
+procedure TfrmAPI.btnNextClick(Sender: TObject);
+begin
+  with moduloREST do
+    begin
+      btnPrevious.Enabled:= true;
+      pagina:= pagina + 1;
+
+      //Initializing information of the listBoxInformation
+      listBoxInformation.Clear;
+      listBoxInformation.BeginUpdate;
+      RESTClient.BaseURL:= '';
+      RESTRequest.Resource:= '';
+
+      if (pagina = 1) then
+        begin
+          btnPrevious.Enabled:= false;
+        end
+      else
+      if (pagina = 6) then
+        begin
+          btnNext.Enabled:= false;
+        end;
+
+      if (pagina >= 1) and (pagina <= 6) then
+        begin
+          RESTClient.BaseURL:= 'https://swapi.dev/api/';
+          RESTRequest.Resource:= 'planets/?page=' + intToStr(pagina);
+          RESTRequest.Execute;
+
+          FDMemTable.Active:= true;
+          FDMemTable.Open;
+          FDMemTable.First;
+          createItems(Sender);
+        end;
+    end;
+end;
+
+procedure TfrmAPI.btnPreviousClick(Sender: TObject);
+begin
+  with moduloREST do
+    begin
+      btnNext.Enabled:= true;
+      pagina:= pagina - 1;
+
+      //Initializing information of the listBoxInformation
+      listBoxInformation.Clear;
+      listBoxInformation.BeginUpdate;
+      RESTClient.BaseURL:= '';
+      RESTRequest.Resource:= '';
+
+      if (pagina = 1) then
+        begin
+          btnPrevious.Enabled:= false;
+        end;
+
+      if (pagina >= 1) and (pagina <= 6) then
+        begin
+          RESTClient.BaseURL:= 'https://swapi.dev/api/';
+          RESTRequest.Resource:= 'planets/?page=' + intToStr(pagina);
+          RESTRequest.Execute;
+
+          FDMemTable.Active:= true;
+          FDMemTable.Open;
+          FDMemTable.First;
+          createItems(Sender);
+        end;
+    end;
 end;
 
 end.

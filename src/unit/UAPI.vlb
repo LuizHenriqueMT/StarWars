@@ -1,12 +1,12 @@
 ﻿[]
-Coordinates=135,53,79,33
+Coordinates=125,121,79,33
 Visible=True
 
 [ModuloREST.RESTClient]
 Coordinates=380,160,137,69
 
 [ModuloREST.RESTRequest]
-Coordinates=420,20,149,87
+Coordinates=430,0,149,141
 
 [ModuloREST.RESTResponse]
 Coordinates=330,270,157,285
@@ -22,29 +22,56 @@ Visible=False
 [panelAPI]
 Coordinates=89,231,58,33
 
-[ListView1]
-Coordinates=650,120,89,159
-
-[listBoxAPI]
-Coordinates=540,320,116,177
-
 [StyleBook1]
 Coordinates=303,1,70,33
 
 [BindSourceDB1]
-Coordinates=820,130,132,321
+Coordinates=800,140,132,339
 
 [BindingsList1]
 Coordinates=135,1,82,33
 
 [ListBoxInformation]
-Coordinates=1010,140,116,213
+Coordinates=1100,130,116,213
 Visible=True
 
 [groupBoxFilter]
-Coordinates=158,210,70,51
+Coordinates=158,210,88,51
 Visible=True
 
-[btnExecute]
-Coordinates=20,231,57,51
+[ModuloREST.RESTResponseFilter]
+Coordinates=105,287,183,285
+
+[edtFilterName]
+Coordinates=224,1,83,51
+
+[ModuloREST.RESTRequestFilter]
+Coordinates=0,0,174,105
+
+[btnFilter]
+Coordinates=20,217,55,51
+
+[ModuloREST.RESTClientFilter]
+Coordinates=1030,1,162,69
+
+[lbPlanetClimate]
+Coordinates=634,551,91,51
+
+[edtFilterClimate]
+Coordinates=525,652,92,51
+
+[edtFilterPopulation]
+Coordinates=292,652,108,51
+
+[lbPlanetName]
+Coordinates=634,628,82,51
+
+[btnClear]
+Coordinates=261,217,56,51
+
+[lbPlanetPopulation]
+Coordinates=634,1,107,51
+
+[btnNext]
+Coordinates=26,121,84,51
 

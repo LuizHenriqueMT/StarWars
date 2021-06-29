@@ -61,7 +61,24 @@ procedure TfrmStarWars.btnPlanetsClick(Sender: TObject);
 begin
   abrirFormAPI(Sender);
 
-  //Execute Planets Request
+  with moduloREST do
+    begin
+      //Initializing information of the listBoxInformation
+      frmAPI.listBoxInformation.Clear;
+      frmAPI.listBoxInformation.BeginUpdate;
+
+      //Execute Planets Request
+      RESTClientFilter.BaseURL:= 'https://swapi.dev/api/';
+      RESTRequest.Resource:= 'planets/';
+      RESTRequest.Execute;
+
+      FDMemTable.Active:= true;
+      FDMemTable.Open;
+      FDMemTable.First;
+      frmAPI.createItems(sender);
+
+      frmAPI.groupBoxFilter.Visible:= true;
+    end;
 end;
 
 end.

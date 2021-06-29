@@ -196,6 +196,7 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <Icon_MainIcon>..\icon\logo_sistema_48p.ico</Icon_MainIcon>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <DCC_UnitSearchPath>G:\Programacao\Repositorio\Delphi\StarWars\modules;G:\Programacao\Repositorio\Delphi\StarWars\modules\.dcu;G:\Programacao\Repositorio\Delphi\StarWars\modules\horse;G:\Programacao\Repositorio\Delphi\StarWars\modules\horse\src;G:\Programacao\Repositorio\Delphi\StarWars\modules\.dcp;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>

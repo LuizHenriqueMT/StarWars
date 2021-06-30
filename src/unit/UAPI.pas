@@ -11,7 +11,8 @@ uses
   Data.Bind.ObjectScope, FMX.StdCtrls, FMX.Edit, REST.Response.Adapter,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   Data.Bind.DBScope, FMX.ListView, FMX.Layouts, FMX.ListBox, FMX.Objects,
-  FMX.Menus,IdHTTP, HTTPApp, System.StrUtils, System.Json, Rest.Json;
+  FMX.Menus,IdHTTP, HTTPApp, System.StrUtils, System.Json, Rest.Json,
+  System.ImageList, FMX.ImgList;
 
 type
   TfrmAPI = class(TForm)
@@ -32,6 +33,7 @@ type
     btnClear: TButton;
     LinkFillControlToField1: TLinkFillControlToField;
     btnPrevious: TSpeedButton;
+    ImageList1: TImageList;
 
     procedure ShowDetails (Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -40,6 +42,8 @@ type
     procedure btnClearClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure TranslateClimate_BR(Sender: Tobject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
 
@@ -89,8 +93,8 @@ end;
 procedure TfrmAPI.createItems(Sender: TObject);
 var
   nomePlaneta, dir: string;
+  ambos: TStringList;
   I: Integer;
-  clima: array [1..13] of string;
 begin
   //icon directory
   dir:= '../StarWars\icon\';
@@ -161,66 +165,23 @@ begin
             end;
 
           //Translating and adding planet climate
-          if (FDMemTable.FieldByName('climate').value) = 'arid' then
-            begin
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_arid.png');
-            end
-          else
-          if (FDMemTable.FieldByName('climate').value) = 'temperate' then
-            begin
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_temperate.png');
-            end
-          else
-          if (FDMemTable.FieldByName('climate').value) = 'frozen' then
-            begin
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_frozen.png');
-            end
-          else
-          if (FDMemTable.FieldByName('climate').value) = 'murky' then
-            begin
-              listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_murky.png');
-            end
-          else
-          if (FDMemTable.FieldByName('climate').Value) = 'temperate, tropical' then
-            begin
-             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
-            end
-          else
-          if (FDMemTable.FieldByName('climate').Value) = 'temperate, arid' then
-            begin
-             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
-            end
-          else
-          if (FDMemTable.FieldByName('climate').Value) = 'temperate, tropical' then
-            begin
-             listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
-            end;
+          TranslateClimate_BR(Sender);
 
-          clima[I]:= FDMemTable.FieldByName('climate').AsString;
+          //Adding climate icons
+          try
+            if pos(',',FDMemTable.FieldByName('climate').AsString) <> 0 then
+              begin
+                listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile(dir + 'climate_both.png');
+              end
+            else
+              begin
+                listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile
+                (dir + 'climate_' + FDMemTable.FieldByName('climate').AsString + '.png');
+              end;
+          except on E: EFOpenError do
 
-          if FDMemTable.FieldByName('climate').AsString = clima[I] then
-            begin
-              clima[I]:= AnsiReplaceText(clima[I], 'arid','Árido');
-              clima[I]:= AnsiReplaceText(clima[I], 'temperate','Temperado');
-              clima[I]:= AnsiReplaceText(clima[I], 'murky','Sombrio/Nublado');
-              clima[I]:= AnsiReplaceText(clima[I], 'windy','Ventoso');
-              clima[I]:= AnsiReplaceText(clima[I], 'hot','Calor');
-              clima[I]:= AnsiReplaceText(clima[I], 'artificial temperate ','Temperatura Artificial ');
-              clima[I]:= AnsiReplaceText(clima[I], 'tropical','Tropical');
-              clima[I]:= AnsiReplaceText(clima[I], 'frozen','Gelado');
-              clima[I]:= AnsiReplaceText(clima[I], 'frigid','Congelado');
-              clima[I]:= AnsiReplaceText(clima[I], 'humid','Úmido');
-              clima[I]:= AnsiReplaceText(clima[I], 'moist','Úmido');
-              clima[I]:= AnsiReplaceText(clima[I], 'polluted','Poluído');
-              clima[I]:= AnsiReplaceText(clima[I], 'superheated','Superaquecido');
-              clima[I]:= AnsiReplaceText(clima[I], 'subartic','Subártico');
-              clima[I]:= AnsiReplaceText(clima[I], 'polluted','Poluído');
-              clima[I]:= AnsiReplaceText(clima[I], 'artic','Ártico');
-              clima[I]:= AnsiReplaceText(clima[I], 'rocky','Rochoso');
-              clima[I]:= AnsiReplaceStr(clima[I], 'unknown','Desconhecido');
+          end;
 
-              listBoxItemCreate.StylesData['vlrClimate']:= clima[I];
-            end;
 
           //Adding the item object created in the previous routine to the listBoxInformation
           listBoxInformation.AddObject(listBoxItemCreate);
@@ -229,6 +190,8 @@ begin
           FDMemTable.Next;
         end;
     end;
+
+  //Ending updates
   listBoxInformation.EndUpdate;
 end;
 
@@ -329,6 +292,11 @@ begin
   frmAPI:= nil;
 end;
 
+procedure TfrmAPI.FormCreate(Sender: TObject);
+begin
+  pagina:= 1;
+end;
+
 procedure TfrmAPI.ShowDetails(Sender: TObject);
 var
   cont, I: integer;
@@ -362,6 +330,45 @@ begin
         end;
     end;
 
+end;
+
+procedure TfrmAPI.TranslateClimate_BR(Sender: Tobject);
+var
+  I: Integer;
+  clima: array [1..13] of string;
+begin
+  with moduloREST do
+    begin
+      //Data count
+      for I:= 1 to (moduloREST.FDMemTable.RecordCount) do
+        begin
+          clima[I]:= FDMemTable.FieldByName('climate').AsString;
+
+          if FDMemTable.FieldByName('climate').AsString = clima[I] then
+            begin
+              clima[I]:= AnsiReplaceText(clima[I], 'arid','Árido');
+              clima[I]:= AnsiReplaceText(clima[I], 'temperate','Temperado');
+              clima[I]:= AnsiReplaceText(clima[I], 'murky','Sombrio/Nublado');
+              clima[I]:= AnsiReplaceText(clima[I], 'windy','Ventoso');
+              clima[I]:= AnsiReplaceText(clima[I], 'hot','Calor');
+              clima[I]:= AnsiReplaceText(clima[I], 'artificial temperate ','Temperatura Artificial ');
+              clima[I]:= AnsiReplaceText(clima[I], 'tropical','Tropical');
+              clima[I]:= AnsiReplaceText(clima[I], 'frozen','Gelado');
+              clima[I]:= AnsiReplaceText(clima[I], 'frigid','Congelado');
+              clima[I]:= AnsiReplaceText(clima[I], 'humid','Úmido');
+              clima[I]:= AnsiReplaceText(clima[I], 'moist','Úmido');
+              clima[I]:= AnsiReplaceText(clima[I], 'polluted','Poluído');
+              clima[I]:= AnsiReplaceText(clima[I], 'superheated','Superaquecido');
+              clima[I]:= AnsiReplaceText(clima[I], 'subartic','Subártico');
+              clima[I]:= AnsiReplaceText(clima[I], 'polluted','Poluído');
+              clima[I]:= AnsiReplaceText(clima[I], 'artic','Ártico');
+              clima[I]:= AnsiReplaceText(clima[I], 'rocky','Rochoso');
+              clima[I]:= AnsiReplaceStr(clima[I], 'unknown','Desconhecido');
+
+              listBoxItemCreate.StylesData['vlrClimate']:= clima[I];
+            end;
+        end;
+    end;
 end;
 
 procedure TfrmAPI.btnNextClick(Sender: TObject);

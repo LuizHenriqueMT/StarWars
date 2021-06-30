@@ -24,244 +24,6 @@ object frmAPI: TfrmAPI
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
   DesignerMasterStyle = 0
-  object listBoxAPI: TListBox
-    Align = Client
-    Size.Width = 862.000000000000000000
-    Size.Height = 701.000000000000000000
-    Size.PlatformDefault = False
-    StyleLookup = 'transparentlistboxstyle'
-    TabOrder = 0
-    DisableFocusEffect = True
-    DefaultItemStyles.ItemStyle = ''
-    DefaultItemStyles.GroupHeaderStyle = ''
-    DefaultItemStyles.GroupFooterStyle = ''
-    ListStyle = Horizontal
-    Viewport.Width = 862.000000000000000000
-    Viewport.Height = 701.000000000000000000
-    object panelAPI: TPanel
-      Align = Client
-      ClipParent = True
-      Margins.Left = 10.000000000000000000
-      Margins.Top = 10.000000000000000000
-      Margins.Right = 10.000000000000000000
-      Margins.Bottom = 10.000000000000000000
-      Size.Width = 842.000000000000000000
-      Size.Height = 681.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'panelAPIStyle1'
-      TabOrder = 0
-      object groupBoxFilter: TGroupBox
-        Align = Top
-        ClipParent = True
-        StyledSettings = [Other]
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 5.000000000000000000
-        Position.Y = 5.000000000000000000
-        Size.Width = 832.000000000000000000
-        Size.Height = 116.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'GroupBox1Style1'
-        Text = 'Filtros'
-        TextSettings.Font.Family = 'Cloud'
-        TextSettings.Font.Size = 16.000000000000000000
-        TextSettings.Font.StyleExt = {00020000000000000004000000}
-        TextSettings.FontColor = xFFE0E0E0
-        TabOrder = 0
-        object edtFilterName: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 1
-          Position.X = 16.000000000000000000
-          Position.Y = 73.000000000000000000
-          Size.Width = 177.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object lbPlanetName: TLabel
-          AutoSize = True
-          StyledSettings = [Family, Style]
-          Position.X = 16.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 161.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFECECEC
-          Text = 'Nome do Planeta:'
-          TabOrder = 0
-        end
-        object btnFilter: TButton
-          StyledSettings = []
-          Position.X = 600.000000000000000000
-          Position.Y = 72.000000000000000000
-          Size.Width = 89.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 6
-          Text = 'Buscar'
-          TextSettings.Font.Family = 'Arial'
-          TextSettings.Font.Size = 14.000000000000000000
-          TextSettings.FontColor = xFF0707FE
-          OnClick = btnFilterClick
-        end
-        object btnClear: TButton
-          StyledSettings = []
-          Position.X = 600.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 89.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 7
-          Text = 'Limpar'
-          TextSettings.Font.Family = 'Arial'
-          TextSettings.Font.Size = 14.000000000000000000
-          TextSettings.FontColor = xFFFD1A1A
-          OnClick = btnClearClick
-        end
-        object edtFilterPopulation: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 3
-          Position.X = 208.000000000000000000
-          Position.Y = 72.000000000000000000
-          Size.Width = 177.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object edtFilterClimate: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 5
-          Position.X = 402.000000000000000000
-          Position.Y = 72.000000000000000000
-          Size.Width = 177.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object lbPlanetClimate: TLabel
-          AutoSize = True
-          StyledSettings = [Family]
-          Position.X = 402.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 161.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFECECEC
-          Text = 'Clima do Planeta:'
-          TabOrder = 4
-        end
-        object lbPlanetPopulation: TLabel
-          AutoSize = True
-          StyledSettings = [Family, Style]
-          Position.X = 208.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 161.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFECECEC
-          Text = 'Popula'#231#227'o do Planeta:'
-          TabOrder = 2
-        end
-      end
-      object ListBoxInformation: TListBox
-        Align = Top
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 5.000000000000000000
-        Position.Y = 131.000000000000000000
-        Size.Width = 832.000000000000000000
-        Size.Height = 502.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'transparentlistboxstyle'
-        TabOrder = 2
-        AllowDrag = True
-        DisableFocusEffect = True
-        DefaultItemStyles.ItemStyle = 'ListBoxItem1Style2'
-        DefaultItemStyles.GroupHeaderStyle = ''
-        DefaultItemStyles.GroupFooterStyle = ''
-        ListStyle = Horizontal
-        ParentShowHint = False
-        ShowHint = False
-        Viewport.Width = 832.000000000000000000
-        Viewport.Height = 502.000000000000000000
-        object ListBoxItem1: TListBoxItem
-          Cursor = crHandPoint
-          Selectable = False
-          ItemData.Accessory = aCheckmark
-          ItemData.Bitmap.PNG = {
-            89504E470D0A1A0A0000000D49484452000000280000002808060000008CFEB8
-            6D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-            05CE494441545847ED976B88555514C7FF7BDFD7A833BEC6CA07655966912232
-            1F4A2C2A5F51066AA15490F430D35E421FA2884AFD608F6FE5138D1E42854128
-            9494910A258120F69A422A0A4D87B1A9B1D1BCE3DC73EF3EFDD7B9EB5EEEE3DC
-            7367EC7E9C1F5CEE59EB9C7BF77FAFBDD6DAFB6090411A8CDB846BDD068C57B3
-            2E56BF1B86BF05B7B88DB84ACD32DC16CCF32CBE460AA3D45597860B240FE4E2
-            F8C47F1B23D50E705BB1DCF3B02769CAFDF568A840FF43C4321E16C48129EE3C
-            76FA2F21EEFB308CEA1A036C4F2691D047FB0D7FD73818A55BF987FBD584F3F1
-            294748310AB3D515E05B4CB52BF0A39A913436820E8BF532C01ADC5E296EA034
-            4CA02C65CE61A19AD1E4709D5ED5A5EE124B1E99B5C8AA5944F2CD2CE5508ABF
-            196D9CEE6135CBF0F96BC3C40CC373389188618679147FA9AB8CBA1174E3B083
-            834F5233C06DC654BF1B4FAA19E06CF9F29692EBD38B0A324096BAEFAB254EA8
-            2B30EB632E6779800570A5BA24C9D73174AB258AEA8243B8C0ECB9DAD163CB79
-            C13E86AFD40C25728919B9519C42B75C7BC0318E33879723BC0C0EB365181FB8
-            D3AEC41E36E0C9C6E06779AE92DE0E6048C8BEE11C3EB3A7B080E9C3B9D52632
-            82BEC164BD94063691C2DA29F48088131FABF689E0A6C15DC17705927B7CA60A
-            FEC74993C2B27AE284E825F63145AF0228AC29090C5713598BF9B9CDF8C8F3F1
-            ACBACA38F707906A554309F2CEE15EFB30BAD41549D512B3006E32318CF57388
-            717A8FC72C6ED45B034222D7F3033072BA3A14A6C5F34C8BF56AD6A53A8216C9
-            4C1F761A8B0F2AC55174BF491F67F42E5643A1E6FD66345E55B35F5409E4ECF6
-            C593D8A666399C7E5F5032D148EEA54F024D97A8837069FF3609DC53DA3BFB43
-            6815BB37D192CBE0BBB8C515EA2A92665E254703F16179DB3BC3022A66659EB3
-            BFE4BF5B8A25C6C4037E63CECCE4E50486A58D29D0C6556A674036E59F0827B4
-            48EC729C8DC7B08CB3AEAA32898A24BFF437C7724C9FD01B4AAE373F896113D5
-            A1B0454DA2A053FC1C6154B65B8B950C4FBBDEAE49CD2A66773FC86AAB9A9D65
-            19378DA1C863C0BFBFF3B962AB264C819E9FD8F7C6E59F8B82933F633AA29BB4
-            10D9664C339EE3D2FCAA6640A1AF510B1C47890D5183483433A781E6D28D91F7
-            24AA9548BB7263B1854D7E69E92E5549E44E22F00F6679065FF20FAD88EB65F2
-            67D334E4E8C95FCB52C79A58B13CC4777F437197F35372E04F7327E12E134435
-            0ACEF574D2C7D36615DE515740640405D38943FC0A3673E60F865ECAA9B37D4B
-            949A594232B01C064E7F2F0F506C737E0252C9DE590ECCAA2F145414711F6F31
-            2BDF55B3486404F9F6D5EA27B083BAEE505728678EE67332C5DCB4297512F973
-            597DC947C9D504C5275A342D74E44C067E3281758CDC9ABCA79C9A02DDEBCC91
-            14F6F27F6F50572892773D3CBC4B24474ECB4753725394F531EE595E0F678615
-            52A2148ACB51DCF2CA652D25328282DBC6D3AFC33C9E98E7673DDCCCFD78A8DE
-            0A04741FE1F2302263D8E12A8F557DDC6DFB5834C3AF5647057C67F93CB60AB7
-            A9194A5D81A530AA291E6B6631E9E733B716757FCBC3040BA7953196A5AB448A
-            EA1CB73C299C3018412F91C4236CD655B9576040020B9C588839398B5D5CB516
-            36E47D4DD730B2412F0E4192306214C9C178022FDB56BC18B60D0E5860C742DC
-            CDDA7F8F97298EBD76C22EAC612B9ACEE5DA1876F2A180742C8EA3EC009DD60F
-            8E589D3C677652781747EFE40A9CA2EF4FE661175746A65346BF05F297A66331
-            9EE1A1753DF3D0D2B161FC6E3CA5B783B73A7F2BEEE7EBC16BC9188AC704FE6E
-            AE1C40D41C3075FBA07072092E63E4BEE06C5E29881BB71BABF57680CCDEAEC2
-            8E641C5318CD3758BCEC8484910BBE2F9048817CE5B41D8BB0229B453B976836
-            0765A0B0562247B155CB21700FEF6165AE4EE4D0C6F7E483EABE606A2E71F712
-            8CE8CD622F1FB85E5DFF50D143CCB95D6AD745969D27CB3845F3DC7361D48CE0
-            F92C6616C451D821E3306320E20459F6FF234E283D2C95F1E0341C1FE2824AFD
-            78FC4558D1F27EFEF57390411A0AF01FF06BD75502325B9C0000000049454E44
-            AE426082}
-          Margins.Bottom = 320.000000000000000000
-          Size.Width = 250.000000000000000000
-          Size.Height = 182.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'ListBoxItem1Style2'
-          TabOrder = 0
-          Text = 'ListBoxItem1'
-        end
-        object SpeedButton1: TSpeedButton
-          Align = Right
-          Position.X = 792.000000000000000000
-          Size.Width = 40.000000000000000000
-          Size.Height = 502.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'arrowrighttoolbutton'
-        end
-      end
-    end
-  end
   object StyleBook1: TStyleBook
     Styles = <
       item
@@ -1802,6 +1564,194 @@ object frmAPI: TfrmAPI
       end>
     Left = 800
     Top = 224
+  end
+  object panelAPI: TPanel
+    Align = Client
+    ClipParent = True
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 842.000000000000000000
+    Size.Height = 681.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'panelAPIStyle1'
+    TabOrder = 3
+    object groupBoxFilter: TGroupBox
+      Align = Top
+      ClipParent = True
+      StyledSettings = [Other]
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 832.000000000000000000
+      Size.Height = 116.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'GroupBox1Style1'
+      Text = 'Filtros'
+      TextSettings.Font.Family = 'Cloud'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00020000000000000004000000}
+      TextSettings.FontColor = xFFE0E0E0
+      TabOrder = 0
+      object edtFilterName: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 16.000000000000000000
+        Position.Y = 73.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lbPlanetName: TLabel
+        AutoSize = True
+        StyledSettings = [Family, Style]
+        Position.X = 16.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFFECECEC
+        Text = 'Nome do Planeta:'
+        TabOrder = 0
+      end
+      object btnFilter: TButton
+        StyledSettings = []
+        Position.X = 600.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Text = 'Buscar'
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = xFF0707FE
+        OnClick = btnFilterClick
+      end
+      object btnClear: TButton
+        StyledSettings = []
+        Position.X = 704.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Text = 'Limpar'
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = xFFFD1A1A
+        OnClick = btnClearClick
+      end
+      object edtFilterPopulation: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 3
+        Position.X = 208.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object edtFilterClimate: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 5
+        Position.X = 402.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lbPlanetClimate: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 402.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFFECECEC
+        Text = 'Clima do Planeta:'
+        TabOrder = 4
+      end
+      object lbPlanetPopulation: TLabel
+        AutoSize = True
+        StyledSettings = [Family, Style]
+        Position.X = 208.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFFECECEC
+        Text = 'Popula'#231#227'o do Planeta:'
+        TabOrder = 2
+      end
+    end
+    object ListBoxInformation: TListBox
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 131.000000000000000000
+      Size.Width = 832.000000000000000000
+      Size.Height = 502.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'transparentlistboxstyle'
+      TabOrder = 2
+      AllowDrag = True
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = 'ListBoxItem1Style2'
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      ListStyle = Horizontal
+      ParentShowHint = False
+      ShowHint = False
+      Viewport.Width = 832.000000000000000000
+      Viewport.Height = 502.000000000000000000
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Position.X = 72.000000000000000000
+        Position.Y = 32.000000000000000000
+        Size.Width = 345.000000000000000000
+        Size.Height = 241.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 341.000000000000000000
+        Viewport.Height = 237.000000000000000000
+      end
+    end
+    object btnNext: TSpeedButton
+      Align = Right
+      Position.X = 640.000000000000000000
+      Position.Y = 638.000000000000000000
+      Size.Width = 202.000000000000000000
+      Size.Height = 43.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowrighttoolbutton'
+      TextSettings.FontColor = xFFD50A0A
+      OnClick = btnNextClick
+    end
+    object btnPrevious: TSpeedButton
+      Align = Right
+      Enabled = False
+      StyledSettings = [Family, Size, Style]
+      Position.X = 438.000000000000000000
+      Position.Y = 638.000000000000000000
+      Size.Width = 202.000000000000000000
+      Size.Height = 43.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbuttonbordered'
+      TextSettings.FontColor = xFFFF1A1A
+      OnClick = btnPreviousClick
+    end
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = ModuloREST.FDMemTable

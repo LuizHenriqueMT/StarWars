@@ -24,550 +24,6 @@ object frmAPI: TfrmAPI
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
   DesignerMasterStyle = 0
-  object listBoxAPI: TListBox
-    Align = Client
-    Size.Width = 862.000000000000000000
-    Size.Height = 701.000000000000000000
-    Size.PlatformDefault = False
-    StyleLookup = 'transparentlistboxstyle'
-    TabOrder = 0
-    DisableFocusEffect = True
-    DefaultItemStyles.ItemStyle = ''
-    DefaultItemStyles.GroupHeaderStyle = ''
-    DefaultItemStyles.GroupFooterStyle = ''
-    ListStyle = Horizontal
-    Viewport.Width = 862.000000000000000000
-    Viewport.Height = 701.000000000000000000
-    object panelAPI: TPanel
-      Align = Client
-      ClipParent = True
-      Margins.Left = 10.000000000000000000
-      Margins.Top = 10.000000000000000000
-      Margins.Right = 10.000000000000000000
-      Margins.Bottom = 10.000000000000000000
-      Size.Width = 842.000000000000000000
-      Size.Height = 681.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'panelAPIStyle1'
-      TabOrder = 0
-      object groupBoxFilter: TGroupBox
-        Align = Top
-        ClipParent = True
-        StyledSettings = [Other]
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 5.000000000000000000
-        Position.Y = 5.000000000000000000
-        Size.Width = 832.000000000000000000
-        Size.Height = 116.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'GroupBox1Style1'
-        Text = 'Filtros'
-        TextSettings.Font.Family = 'Cloud'
-        TextSettings.Font.Size = 16.000000000000000000
-        TextSettings.Font.StyleExt = {00020000000000000004000000}
-        TextSettings.FontColor = xFFE0E0E0
-        TabOrder = 0
-        object edtFilterName: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 1
-          Position.X = 16.000000000000000000
-          Position.Y = 73.000000000000000000
-          Size.Width = 177.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object lbPlanetName: TLabel
-          AutoSize = True
-          StyledSettings = [Family, Style]
-          Position.X = 16.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 161.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFECECEC
-          Text = 'Nome do Planeta:'
-          TabOrder = 0
-        end
-        object btnFilter: TButton
-          StyledSettings = []
-          Position.X = 600.000000000000000000
-          Position.Y = 72.000000000000000000
-          Size.Width = 89.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 6
-          Text = 'Buscar'
-          TextSettings.Font.Family = 'Arial'
-          TextSettings.Font.Size = 14.000000000000000000
-          TextSettings.FontColor = xFF0707FE
-          OnClick = btnFilterClick
-        end
-        object btnClear: TButton
-          StyledSettings = []
-          Position.X = 600.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 89.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 7
-          Text = 'Limpar'
-          TextSettings.Font.Family = 'Arial'
-          TextSettings.Font.Size = 14.000000000000000000
-          TextSettings.FontColor = xFFFD1A1A
-          OnClick = btnClearClick
-        end
-        object edtFilterPopulation: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 3
-          Position.X = 208.000000000000000000
-          Position.Y = 72.000000000000000000
-          Size.Width = 177.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object edtFilterClimate: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 5
-          Position.X = 402.000000000000000000
-          Position.Y = 72.000000000000000000
-          Size.Width = 177.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object lbPlanetClimate: TLabel
-          AutoSize = True
-          StyledSettings = [Family]
-          Position.X = 402.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 161.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFECECEC
-          Text = 'Clima do Planeta:'
-          TabOrder = 4
-        end
-        object lbPlanetPopulation: TLabel
-          AutoSize = True
-          StyledSettings = [Family, Style]
-          Position.X = 208.000000000000000000
-          Position.Y = 40.000000000000000000
-          Size.Width = 161.000000000000000000
-          Size.Height = 22.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFECECEC
-          Text = 'Popula'#231#227'o do Planeta:'
-          TabOrder = 2
-        end
-      end
-      object ListView1: TListView
-        ItemAppearanceClassName = 'TDynamicAppearance'
-        ItemEditAppearanceClassName = 'TDynamicAppearance'
-        HeaderAppearanceClassName = 'TListHeaderObjects'
-        FooterAppearanceClassName = 'TListHeaderObjects'
-        Transparent = True
-        Align = Client
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Size.Width = 832.000000000000000000
-        Size.Height = 344.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 2
-        Visible = False
-        ItemAppearance.ItemHeight = 100
-        ItemAppearance.HeaderHeight = 30
-        ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
-          item
-            AppearanceObjectName = 'nomePlaneta'
-            AppearanceClassName = 'TTextObjectAppearance'
-            Appearance.TextAlign = Leading
-            Appearance.WordWrap = True
-            Appearance.Width = 116.000000000000000000
-            Appearance.Height = 27.000000000000000000
-            Appearance.PlaceOffset.X = 3.000000000000000000
-            Appearance.PlaceOffset.Y = 8.000000000000000000
-          end>
-        ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
-          item
-            AppearanceObjectName = 'Text1'
-            AppearanceClassName = 'TTextObjectAppearance'
-          end>
-        ItemAppearanceObjects.HeaderObjects.Text.Font.Family = 'Cloud'
-        ItemAppearanceObjects.HeaderObjects.Text.Font.Size = 20.000000000000000000
-        ItemAppearanceObjects.HeaderObjects.Text.Font.StyleExt = {00070000000000000004000000}
-        ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
-        ItemAppearanceObjects.HeaderObjects.Text.WordWrap = True
-        ItemAppearanceObjects.HeaderObjects.Text.Width = 805.000000000000000000
-        ItemAppearanceObjects.HeaderObjects.Text.Height = 24.000000000000000000
-        ItemAppearanceObjects.HeaderObjects.Text.Align = Center
-        ItemAppearanceObjects.HeaderObjects.Text.VertAlign = Center
-        ItemAppearanceObjects.FooterObjects.Text.Width = 795.000000000000000000
-        ItemAppearanceObjects.FooterObjects.Text.Height = 105.000000000000000000
-        StyleLookup = 'listviewstyle'
-        SelectionCrossfade = True
-      end
-      object ListBoxInformation: TListBox
-        Align = Top
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 5.000000000000000000
-        Position.Y = 131.000000000000000000
-        Size.Width = 832.000000000000000000
-        Size.Height = 502.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'transparentlistboxstyle'
-        TabOrder = 3
-        AllowDrag = True
-        DisableFocusEffect = True
-        DefaultItemStyles.ItemStyle = 'ListBoxItem1Style2'
-        DefaultItemStyles.GroupHeaderStyle = ''
-        DefaultItemStyles.GroupFooterStyle = ''
-        ListStyle = Horizontal
-        ParentShowHint = False
-        ShowHint = False
-        Viewport.Width = 832.000000000000000000
-        Viewport.Height = 502.000000000000000000
-        object ListBoxItem1: TListBoxItem
-          Cursor = crHandPoint
-          Selectable = False
-          ItemData.Accessory = aCheckmark
-          ItemData.Bitmap.PNG = {
-            89504E470D0A1A0A0000000D49484452000000280000002808060000008CFEB8
-            6D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-            05CA494441545847ED976B88156518C7FFF3CE19CFAEEE7A5B2B2F9465D91629
-            22FBA1C4A2F21665A0164A05491733ED26F4218AA8D40F76F9565ED1E8225418
-            84424919A950120862B72DA4A2D07459B3D656F3ACBB67E69DFECF9CE71CCE65
-            CE9C5D3B1FF7078733CF3373CEFCDFE736EF609041EA8CDD886BED7A8C57B326
-            46BFEB46B819B7D80DB84ACD12EC66CCF50DBE461AA3D45593BA0B240F04297C
-            12BE8D916A47D82D58E6FBD8ED39A5FE5AD45560F821DCAC8FF929A0D59EC78E
-            F025A4C2100EA3BADA01B6791E3CBDB4DFF077F58351BA957FB84F4DD8109FF2
-            0E69466196BA2242832966397E543391FA46D062911E461807B7978B1B287513
-            28A90C2C16A8994C80EBF4A82635532C75E4AC81AF6601A93767096FA5849BD0
-            C6E51E52B38490BF76589871642D8E7B2EA63B8FE22F7595503382761CB6F3E6
-            93D48CB09B3025ECC2936A4658539ADE62825E3D28230BF8D47D5F3571424D81
-            4188395CE57E36C095EA92225FCBD0AD9228AA0B16F102FD73D5A3C791F38279
-            0C5FA9194B628A19B9515C42971C73B547799FD93C1CE167718823C309813BCD
-            0AECE6009EEC38F859AE2BA7A703688C796E588BCFCC49CC67F9706DD5498C60
-            E860B21ECA009B4861ED2CA7FD224E7CECDA27A2930EEE8ABECB90DAE3351570
-            B1279C3496D6122724A73844AB1E45505803850E571381C1BC60133EF2433CAB
-            AE12CEFD01A45BD450A2BAB3B8D73C8C53EA4AA422C56C809B1C1763C3002E97
-            F7B86B70A39E1A1012B9EE1F8091D3D4A1B02C9E6759AC53B3269511341892ED
-            C30EC7E083727114DD6F32C718BD8BD550A8799F331AAFAAD92F2A0472757B5D
-            0F5BD52C85CBEF8D5A2619A9BDCC09A0E1127510A6F66FC7C33DC5B3B33FC476
-            B17D13CD411FBE4B195CA1AE0219D6D590D1406A58CECE9E616D16AA32C7D95F
-            72DFCD851663E101BFB16666F07002C3D2C612686396DA19908DB92BE2896D12
-            B30C67532E9672D5155D265191E297F9667941E6B89E50829EDC22864D5487C2
-            113589824EF2739851D9660C56303CED7ABA2A55BB98D3FD00575CB13A338422
-            C750E451E0DFDF795D6154139640F74F9C7BE372D725C1B59D713A9287B49038
-            669C263CC7D4FCAA66447EAE510B6C1FE036AA41249A7DA781A6E20723CF4954
-            CB917165C7623387FC92E2A75439894F12817F30D377F025FFD088B81E16BF9F
-            A1215B4FFE5A52ED36B063B989EFFA86E22EE7A768C39FE193844F9928AA4930
-            A2A7BD104F3B2BF18EBA22122328389D38C8AFE861CEFAC1D04BB9748E6F8952
-            135B486E2C9B81D3DFCB0514DB945B807472F62C23CAAECF3754126E88B75895
-            EFAA592031827CFB6A093D6CA7AE3BD415CB9923B99A4CB3364D5A9D44FE5CB2
-            2FF528B5EA51BCD7AC65A177CE66117A29AC65E456E73CA55415685F678DA4B1
-            87FF7B83BA6291BAEBE6E65D2239726A2E9A529BA2AC9771F7793C9C15962F89
-            62282EA0B865E5692D26318282DDCADDAFC55CEE98E7053E6EE6F378A89E8A04
-            741D660A1991319C70E5DBAA5E3E6D7BD934C3AF5647197C67F9DC5D89DBD48C
-            A5A6C06218D534DB6F268B7E1E6B6B61D7B7DC4CB0715A1863495D39D254E7F8
-            C893C6898311CCA63C3CC2615D517B79062430CFF10598CD9DCC4E66AD990379
-            6FE3358C6C348B6390224CB88BD4A09BC2CBA6052FC63D06072CB06301EE66EF
-            BFC7C334EFBD66C24EACE6289AC6746D88DBF95040C6B838C209D069C2688BD5
-            C97D6627859FE2DD3B998193F4FDC93A3CC5CCC8724AE8B740FED2E9588467B8
-            695DC73A3474AC1FBF0B4FE9E9E8AD2EDC82FB7D8BD7F81254D826F077736403
-            A2E680A9390785138B711923F70557F34A5EDCB85D58A5A72364F56625B6B32B
-            5B19CD37387839090923177D5F208902F9CA693A1662B9EFA39D299AC59B3250
-            582391A3D88A74087C8677B33357A502B4F13DF980BA2F98AA29EE5A8C113D3E
-            F6F082EBD5F50F153DC49ADBA9764D24EDDC59A6289A6BBB30AA46F0BC8F1979
-            711476D0B1983E107182A4FDFF88138A374B253C3815C71A6DD4A91F8FBF08CB
-            9BDFCFBD7E0E32485D01FE033B9DD7574A6A7B5A0000000049454E44AE426082}
-          Margins.Bottom = 320.000000000000000000
-          Size.Width = 250.000000000000000000
-          Size.Height = 182.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'ListBoxItem1Style2'
-          TabOrder = 0
-          Text = 'ListBoxItem1'
-        end
-        object Memo1: TMemo
-          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-          DataDetectorTypes = []
-          Lines.Strings = (
-            '{'
-            '    "count": 60, '
-            '    "next": "https://swapi.dev/api/planets/?page=2", '
-            '    "previous": null, '
-            '    "results": ['
-            '        {'
-            '            "name": "Tatooine", '
-            '            "rotation_period": "23", '
-            '            "orbital_period": "304", '
-            '            "diameter": "10465", '
-            '            "climate": "arid", '
-            '            "gravity": "1 standard", '
-            '            "terrain": "desert", '
-            '            "surface_water": "1", '
-            '            "population": "200000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/1/", '
-            '                "https://swapi.dev/api/people/2/", '
-            '                "https://swapi.dev/api/people/4/", '
-            '                "https://swapi.dev/api/people/6/", '
-            '                "https://swapi.dev/api/people/7/", '
-            '                "https://swapi.dev/api/people/8/", '
-            '                "https://swapi.dev/api/people/9/", '
-            '                "https://swapi.dev/api/people/11/", '
-            '                "https://swapi.dev/api/people/43/", '
-            '                "https://swapi.dev/api/people/62/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/1/", '
-            '                "https://swapi.dev/api/films/3/", '
-            '                "https://swapi.dev/api/films/4/", '
-            '                "https://swapi.dev/api/films/5/", '
-            '                "https://swapi.dev/api/films/6/"'
-            '            ], '
-            '            "created": "2014-12-09T13:50:49.641000Z", '
-            '            "edited": "2014-12-20T20:58:18.411000Z", '
-            '            "url": "https://swapi.dev/api/planets/1/"'
-            '        }, '
-            '        {'
-            '            "name": "Alderaan", '
-            '            "rotation_period": "24", '
-            '            "orbital_period": "364", '
-            '            "diameter": "12500", '
-            '            "climate": "temperate", '
-            '            "gravity": "1 standard", '
-            '            "terrain": "grasslands, mountains", '
-            '            "surface_water": "40", '
-            '            "population": "2000000000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/5/", '
-            '                "https://swapi.dev/api/people/68/", '
-            '                "https://swapi.dev/api/people/81/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/1/", '
-            '                "https://swapi.dev/api/films/6/"'
-            '            ], '
-            '            "created": "2014-12-10T11:35:48.479000Z", '
-            '            "edited": "2014-12-20T20:58:18.420000Z", '
-            '            "url": "https://swapi.dev/api/planets/2/"'
-            '        }, '
-            '        {'
-            '            "name": "Yavin IV", '
-            '            "rotation_period": "24", '
-            '            "orbital_period": "4818", '
-            '            "diameter": "10200", '
-            '            "climate": "temperate, tropical", '
-            '            "gravity": "1 standard", '
-            '            "terrain": "jungle, rainforests", '
-            '            "surface_water": "8", '
-            '            "population": "1000", '
-            '            "residents": [], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/1/"'
-            '            ], '
-            '            "created": "2014-12-10T11:37:19.144000Z", '
-            '            "edited": "2014-12-20T20:58:18.421000Z", '
-            '            "url": "https://swapi.dev/api/planets/3/"'
-            '        }, '
-            '        {'
-            '            "name": "Hoth", '
-            '            "rotation_period": "23", '
-            '            "orbital_period": "549", '
-            '            "diameter": "7200", '
-            '            "climate": "frozen", '
-            '            "gravity": "1.1 standard", '
-            '            "terrain": "tundra, ice caves, mountain ranges", '
-            '            "surface_water": "100", '
-            '            "population": "unknown", '
-            '            "residents": [], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/2/"'
-            '            ], '
-            '            "created": "2014-12-10T11:39:13.934000Z", '
-            '            "edited": "2014-12-20T20:58:18.423000Z", '
-            '            "url": "https://swapi.dev/api/planets/4/"'
-            '        }, '
-            '        {'
-            '            "name": "Dagobah", '
-            '            "rotation_period": "23", '
-            '            "orbital_period": "341", '
-            '            "diameter": "8900", '
-            '            "climate": "murky", '
-            '            "gravity": "N/A", '
-            '            "terrain": "swamp, jungles", '
-            '            "surface_water": "8", '
-            '            "population": "unknown", '
-            '            "residents": [], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/2/", '
-            '                "https://swapi.dev/api/films/3/", '
-            '                "https://swapi.dev/api/films/6/"'
-            '            ], '
-            '            "created": "2014-12-10T11:42:22.590000Z", '
-            '            "edited": "2014-12-20T20:58:18.425000Z", '
-            '            "url": "https://swapi.dev/api/planets/5/"'
-            '        }, '
-            '        {'
-            '            "name": "Bespin", '
-            '            "rotation_period": "12", '
-            '            "orbital_period": "5110", '
-            '            "diameter": "118000", '
-            '            "climate": "temperate", '
-            
-              '            "gravity": "1.5 (surface), 1 standard (Cloud City)",' +
-              ' '
-            '            "terrain": "gas giant", '
-            '            "surface_water": "0", '
-            '            "population": "6000000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/26/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/2/"'
-            '            ], '
-            '            "created": "2014-12-10T11:43:55.240000Z", '
-            '            "edited": "2014-12-20T20:58:18.427000Z", '
-            '            "url": "https://swapi.dev/api/planets/6/"'
-            '        }, '
-            '        {'
-            '            "name": "Endor", '
-            '            "rotation_period": "18", '
-            '            "orbital_period": "402", '
-            '            "diameter": "4900", '
-            '            "climate": "temperate", '
-            '            "gravity": "0.85 standard", '
-            '            "terrain": "forests, mountains, lakes", '
-            '            "surface_water": "8", '
-            '            "population": "30000000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/30/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/3/"'
-            '            ], '
-            '            "created": "2014-12-10T11:50:29.349000Z", '
-            '            "edited": "2014-12-20T20:58:18.429000Z", '
-            '            "url": "https://swapi.dev/api/planets/7/"'
-            '        }, '
-            '        {'
-            '            "name": "Naboo", '
-            '            "rotation_period": "26", '
-            '            "orbital_period": "312", '
-            '            "diameter": "12120", '
-            '            "climate": "temperate", '
-            '            "gravity": "1 standard", '
-            
-              '            "terrain": "grassy hills, swamps, forests, mountains' +
-              '", '
-            '            "surface_water": "12", '
-            '            "population": "4500000000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/3/", '
-            '                "https://swapi.dev/api/people/21/", '
-            '                "https://swapi.dev/api/people/35/", '
-            '                "https://swapi.dev/api/people/36/", '
-            '                "https://swapi.dev/api/people/37/", '
-            '                "https://swapi.dev/api/people/38/", '
-            '                "https://swapi.dev/api/people/39/", '
-            '                "https://swapi.dev/api/people/42/", '
-            '                "https://swapi.dev/api/people/60/", '
-            '                "https://swapi.dev/api/people/61/", '
-            '                "https://swapi.dev/api/people/66/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/3/", '
-            '                "https://swapi.dev/api/films/4/", '
-            '                "https://swapi.dev/api/films/5/", '
-            '                "https://swapi.dev/api/films/6/"'
-            '            ], '
-            '            "created": "2014-12-10T11:52:31.066000Z", '
-            '            "edited": "2014-12-20T20:58:18.430000Z", '
-            '            "url": "https://swapi.dev/api/planets/8/"'
-            '        }, '
-            '        {'
-            '            "name": "Coruscant", '
-            '            "rotation_period": "24", '
-            '            "orbital_period": "368", '
-            '            "diameter": "12240", '
-            '            "climate": "temperate", '
-            '            "gravity": "1 standard", '
-            '            "terrain": "cityscape, mountains", '
-            '            "surface_water": "unknown", '
-            '            "population": "1000000000000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/34/", '
-            '                "https://swapi.dev/api/people/55/", '
-            '                "https://swapi.dev/api/people/74/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/3/", '
-            '                "https://swapi.dev/api/films/4/", '
-            '                "https://swapi.dev/api/films/5/", '
-            '                "https://swapi.dev/api/films/6/"'
-            '            ], '
-            '            "created": "2014-12-10T11:54:13.921000Z", '
-            '            "edited": "2014-12-20T20:58:18.432000Z", '
-            '            "url": "https://swapi.dev/api/planets/9/"'
-            '        }, '
-            '        {'
-            '            "name": "Kamino", '
-            '            "rotation_period": "27", '
-            '            "orbital_period": "463", '
-            '            "diameter": "19720", '
-            '            "climate": "temperate", '
-            '            "gravity": "1 standard", '
-            '            "terrain": "ocean", '
-            '            "surface_water": "100", '
-            '            "population": "1000000000", '
-            '            "residents": ['
-            '                "https://swapi.dev/api/people/22/", '
-            '                "https://swapi.dev/api/people/72/", '
-            '                "https://swapi.dev/api/people/73/"'
-            '            ], '
-            '            "films": ['
-            '                "https://swapi.dev/api/films/5/"'
-            '            ], '
-            '            "created": "2014-12-10T12:45:06.577000Z", '
-            '            "edited": "2014-12-20T20:58:18.434000Z", '
-            '            "url": "https://swapi.dev/api/planets/10/"'
-            '        }'
-            '    ]'
-            '}')
-          StyledSettings = [Family, Style, FontColor]
-          TextSettings.Font.Size = 18.000000000000000000
-          Position.X = 128.000000000000000000
-          Position.Y = 344.000000000000000000
-          Size.Width = 361.000000000000000000
-          Size.Height = 105.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 0
-          Visible = False
-          Viewport.Width = 341.000000000000000000
-          Viewport.Height = 85.000000000000000000
-        end
-        object SpeedButton1: TSpeedButton
-          Align = Right
-          Position.X = 792.000000000000000000
-          Size.Width = 40.000000000000000000
-          Size.Height = 502.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'arrowrighttoolbutton'
-        end
-      end
-    end
-  end
   object StyleBook1: TStyleBook
     Styles = <
       item
@@ -2108,6 +1564,181 @@ object frmAPI: TfrmAPI
       end>
     Left = 800
     Top = 224
+  end
+  object panelAPI: TPanel
+    Align = Client
+    ClipParent = True
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 842.000000000000000000
+    Size.Height = 681.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'panelAPIStyle1'
+    TabOrder = 3
+    object groupBoxFilter: TGroupBox
+      Align = Top
+      ClipParent = True
+      StyledSettings = [Other]
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 832.000000000000000000
+      Size.Height = 116.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'GroupBox1Style1'
+      Text = 'Filtros'
+      TextSettings.Font.Family = 'Cloud'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00020000000000000004000000}
+      TextSettings.FontColor = xFFE0E0E0
+      Visible = False
+      TabOrder = 0
+      object edtFilterName: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 16.000000000000000000
+        Position.Y = 73.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lbPlanetName: TLabel
+        AutoSize = True
+        StyledSettings = [Family, Style]
+        Position.X = 16.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFFECECEC
+        Text = 'Nome do Planeta:'
+        TabOrder = 0
+      end
+      object btnFilter: TButton
+        StyledSettings = []
+        Position.X = 600.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Text = 'Buscar'
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = xFF0707FE
+        OnClick = btnFilterClick
+      end
+      object btnClear: TButton
+        StyledSettings = []
+        Position.X = 704.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Text = 'Limpar'
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = xFFFD1A1A
+        OnClick = btnClearClick
+      end
+      object edtFilterPopulation: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 3
+        Position.X = 208.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object edtFilterClimate: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 5
+        Position.X = 402.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lbPlanetClimate: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 402.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFFECECEC
+        Text = 'Clima do Planeta:'
+        TabOrder = 4
+      end
+      object lbPlanetPopulation: TLabel
+        AutoSize = True
+        StyledSettings = [Family, Style]
+        Position.X = 208.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFFECECEC
+        Text = 'Popula'#231#227'o do Planeta:'
+        TabOrder = 2
+      end
+    end
+    object ListBoxInformation: TListBox
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 832.000000000000000000
+      Size.Height = 502.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'transparentlistboxstyle'
+      TabOrder = 2
+      AllowDrag = True
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = 'ListBoxItem1Style2'
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      ListStyle = Horizontal
+      ParentShowHint = False
+      ShowHint = False
+      Viewport.Width = 832.000000000000000000
+      Viewport.Height = 502.000000000000000000
+    end
+    object btnNext: TSpeedButton
+      Align = Right
+      Position.X = 640.000000000000000000
+      Position.Y = 512.000000000000000000
+      Size.Width = 202.000000000000000000
+      Size.Height = 169.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowrighttoolbutton'
+      TextSettings.FontColor = xFFD50A0A
+      OnClick = btnNextClick
+    end
+    object btnPrevious: TSpeedButton
+      Align = Right
+      Enabled = False
+      Position.X = 438.000000000000000000
+      Position.Y = 512.000000000000000000
+      Size.Width = 202.000000000000000000
+      Size.Height = 169.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'arrowlefttoolbuttonbordered'
+      OnClick = btnPreviousClick
+    end
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = ModuloREST.FDMemTable

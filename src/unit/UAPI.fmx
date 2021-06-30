@@ -22,6 +22,7 @@ object frmAPI: TfrmAPI
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   OnClose = FormClose
   DesignerMasterStyle = 0
   object StyleBook1: TStyleBook
@@ -1596,7 +1597,6 @@ object frmAPI: TfrmAPI
       TextSettings.Font.Size = 16.000000000000000000
       TextSettings.Font.StyleExt = {00020000000000000004000000}
       TextSettings.FontColor = xFFE0E0E0
-      Visible = False
       TabOrder = 0
       object edtFilterName: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -1700,7 +1700,7 @@ object frmAPI: TfrmAPI
       Margins.Right = 5.000000000000000000
       Margins.Bottom = 5.000000000000000000
       Position.X = 5.000000000000000000
-      Position.Y = 5.000000000000000000
+      Position.Y = 131.000000000000000000
       Size.Width = 832.000000000000000000
       Size.Height = 502.000000000000000000
       Size.PlatformDefault = False
@@ -1720,9 +1720,9 @@ object frmAPI: TfrmAPI
     object btnNext: TSpeedButton
       Align = Right
       Position.X = 640.000000000000000000
-      Position.Y = 512.000000000000000000
+      Position.Y = 638.000000000000000000
       Size.Width = 202.000000000000000000
-      Size.Height = 169.000000000000000000
+      Size.Height = 43.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'arrowrighttoolbutton'
       TextSettings.FontColor = xFFD50A0A
@@ -1731,12 +1731,14 @@ object frmAPI: TfrmAPI
     object btnPrevious: TSpeedButton
       Align = Right
       Enabled = False
+      StyledSettings = [Family, Size, Style]
       Position.X = 438.000000000000000000
-      Position.Y = 512.000000000000000000
+      Position.Y = 638.000000000000000000
       Size.Width = 202.000000000000000000
-      Size.Height = 169.000000000000000000
+      Size.Height = 43.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'arrowlefttoolbuttonbordered'
+      TextSettings.FontColor = xFFFF1A1A
       OnClick = btnPreviousClick
     end
   end
@@ -1763,5 +1765,11 @@ object frmAPI: TfrmAPI
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
+  end
+  object ImageList1: TImageList
+    Source = <>
+    Destination = <>
+    Left = 799
+    Top = 397
   end
 end

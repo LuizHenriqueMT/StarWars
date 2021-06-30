@@ -34,6 +34,7 @@ type
     LinkFillControlToField1: TLinkFillControlToField;
     btnPrevious: TSpeedButton;
     ImageList1: TImageList;
+    ListBoxItem1: TListBoxItem;
 
     procedure ShowDetails (Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -121,6 +122,8 @@ begin
           listBoxItemCreate.StylesData['lbTitle']:= FDMemTable.FieldByName('name').AsString;
 
           //Translating and adding population of the planet
+
+          //Adding unknown planet population
           if (FDMemTable.FieldByName('population').Value) = 'unknown' then
             begin
               listBoxItemCreate.StylesData['vlrPopulation']:= Desconhecido;
@@ -131,7 +134,7 @@ begin
               (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('population').AsString)));
             end;
 
-          //Adding planet rotation
+          //Adding unknown planet rotation
           if (FDMemTable.FieldByName('rotation_period').Value) = 'unknown' then
             begin
               listBoxItemCreate.StylesData['vlrRotationPeriod']:= Desconhecido;
@@ -142,19 +145,19 @@ begin
               FDMemTable.FieldByName('rotation_period').AsString;
             end;
 
-          //Adding planet orbital
+          //Adding unknown planet orbital
           if (FDMemTable.FieldByName('orbital_period').Value) = 'unknown' then
             begin
               listBoxItemCreate.StylesData['vlrOrbitalPeriod']:= Desconhecido;
-            end;
-          {else
+            end
+          else
             begin
               listBoxItemCreate.StylesData['vlrOrbitalPeriod']:=
               (formatFloat('#,##0',strtofloat(FDMemTable.FieldByName('orbital_period').AsString)));
-            end;}
+            end;
 
-          //Adding planet diameter
-          if (FDMemTable.FieldByName('orbital_period').Value) = 'unknown' then
+          //Adding unknown planet diameter
+          if (FDMemTable.FieldByName('diameter').Value) = 'unknown' then
             begin
               listBoxItemCreate.StylesData['diameter']:= Desconhecido;
             end
@@ -178,10 +181,10 @@ begin
                 listboxInformation.ListItems[I-1].ItemData.Bitmap.loadfromfile
                 (dir + 'climate_' + FDMemTable.FieldByName('climate').AsString + '.png');
               end;
-          except on E: EFOpenError do
+          except on
+            E: EFOpenError do
 
           end;
-
 
           //Adding the item object created in the previous routine to the listBoxInformation
           listBoxInformation.AddObject(listBoxItemCreate);
